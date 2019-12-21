@@ -9,14 +9,19 @@
 import UIKit
 
 final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    let presenting: Bool
+    enum TransitionType {
+        case push
+        case pop
+    }
 
-    init(presenting: Bool) {
-        self.presenting = presenting
+    let type: TransitionType
+
+    init(transitionType type: TransitionType) {
+        self.type = type
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return 0.4
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -26,40 +31,52 @@ final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning 
         let duration = transitionDuration(using: transitionContext)
 
         let container = transitionContext.containerView
-        if presenting {
+        if type == .push {
             container.addSubview(toView)
         } else {
             container.insertSubview(toView, belowSubview: fromView)
         }
 
-        let toViewFrame = toView.frame
-        toView.frame = CGRect(x: presenting ? toView.frame.width : -toView.frame.width, y: toView.frame.origin.y, width: toView.frame.width, height: toView.frame.height)
+        addDropShadowToLeftEdge(view: toView)
+        addDropShadowToLeftEdge(view: fromView)
 
-        let animations = {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
-                toView.alpha = 1
-                if self.presenting {
-                    fromView.alpha = 0
-                }
+        let toViewFinalCenterX = toView.center
+
+        print(container)
+
+        let viewOffset: CGFloat = container.bounds.width*0.3
+
+        let toViewStartingCenterX = type == .push ? container.center.x + container.bounds.width : container.center.x - viewOffset
+        toView.center = CGPoint(x: toViewStartingCenterX, y: toView.center.y)
+
+        let animationOptions: UIView.AnimationOptions = transitionContext.isInteractive ? .curveLinear : .curveEaseOut
+        print(transitionContext.isInteractive)
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
+            toView.alpha = 1.0
+            fromView.alpha = self.type == .push ? 0.8 : 1.0
+
+            toView.center = toViewFinalCenterX
+
+            if self.type == .push {
+                fromView.center = CGPoint(x: container.center.x - viewOffset, y: container.center.y)
+            } else {
+                fromView.center = CGPoint(x: container.center.x + container.bounds.width,
+                                          y: container.center.y)
             }
-
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1) {
-                toView.frame = toViewFrame
-                fromView.frame = CGRect(x: self.presenting ? -fromView.frame.width : fromView.frame.width, y: fromView.frame.origin.y, width: fromView.frame.width, height: fromView.frame.height)
-                if !self.presenting {
-                    fromView.alpha = 0
-                }
-            }
-
+        }) { (_) in
+            container.addSubview(toView)
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
+    }
 
-        UIView.animateKeyframes(withDuration: duration,
-                                delay: 0,
-                                options: .calculationModeCubic,
-                                animations: animations,
-                                completion: { finished in
-                                    container.addSubview(toView)
-                                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-        })
+    private func addDropShadowToLeftEdge(view: UIView) {
+        let shadowPath = UIBezierPath(rect: view.frame)
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowOffset = CGSize(width: -0.5, height: 0)
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowRadius = 0.1
+        view.layer.masksToBounds =  false
+        view.layer.shadowPath = shadowPath.cgPath
     }
 }
