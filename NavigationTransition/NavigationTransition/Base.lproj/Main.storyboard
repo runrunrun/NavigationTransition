@@ -26,7 +26,7 @@
         <!--ViewController1-->
         <scene sceneID="he4-Mb-m80">
             <objects>
-                <viewController id="XlA-eb-6VB" sceneMemberID="viewController">
+                <viewController id="XlA-eb-6VB" customClass="ViewController1" customModule="NavigationTransition" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mgt-h9-kET">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
         <!--ViewController2-->
         <scene sceneID="YdX-57-k69">
             <objects>
-                <viewController id="4Zl-hF-EGX" sceneMemberID="viewController">
+                <viewController id="4Zl-hF-EGX" customClass="ViewController2" customModule="NavigationTransition" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="va3-jO-3v9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -84,7 +84,7 @@
         <!--ViewController3-->
         <scene sceneID="R9E-Bd-pHk">
             <objects>
-                <viewController id="5M7-0b-WBm" userLabel="ViewController3" sceneMemberID="viewController">
+                <viewController id="5M7-0b-WBm" userLabel="ViewController3" customClass="ViewController3" customModule="NavigationTransition" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PMe-id-c5L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -113,7 +113,7 @@
         <!--ViewController4-->
         <scene sceneID="Yli-Rb-6AX">
             <objects>
-                <viewController id="IXy-iB-sVm" userLabel="ViewController4" sceneMemberID="viewController">
+                <viewController id="IXy-iB-sVm" userLabel="ViewController4" customClass="ViewController4" customModule="NavigationTransition" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tcD-2D-gYk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,7 @@
         <!--ViewController5-->
         <scene sceneID="sRJ-sa-hpn">
             <objects>
-                <viewController id="pxf-IK-Aac" userLabel="ViewController5" sceneMemberID="viewController">
+                <viewController id="pxf-IK-Aac" userLabel="ViewController5" customClass="ViewController5" customModule="NavigationTransition" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JX3-qE-FyR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

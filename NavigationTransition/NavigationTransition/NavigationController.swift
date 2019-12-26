@@ -40,7 +40,8 @@ class NavigationController: UINavigationController {
             if let topViewController = self.viewControllers.last as? NavigationControllerDelegate {
                 topViewController.popBackViewController(animated: true)
             } else {
-                popViewController(animated: true)
+                // Do nothing
+//                popViewController(animated: true)
             }
         } else if gestureRecognizer.state == .changed {
             interactionController?.update(percent)

@@ -42,15 +42,12 @@ final class TransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning 
 
         let toViewFinalCenterX = toView.center
 
-        print(container)
-
         let viewOffset: CGFloat = container.bounds.width*0.3
 
         let toViewStartingCenterX = type == .push ? container.center.x + container.bounds.width : container.center.x - viewOffset
         toView.center = CGPoint(x: toViewStartingCenterX, y: toView.center.y)
 
         let animationOptions: UIView.AnimationOptions = transitionContext.isInteractive ? .curveLinear : .curveEaseOut
-        print(transitionContext.isInteractive)
 
         UIView.animate(withDuration: duration, delay: 0.0, options: animationOptions, animations: {
             toView.alpha = 1.0

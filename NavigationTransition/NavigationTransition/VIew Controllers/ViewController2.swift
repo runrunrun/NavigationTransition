@@ -16,6 +16,7 @@ class ViewController2: UIViewController {
 
 extension ViewController2: NavigationControllerDelegate {
     func popBackViewController(animated: Bool) {
+        print("Pop ViewController2")
         navigationController?.popViewController(animated: animated)
     }
 }
